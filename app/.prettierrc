@@ -1,0 +1,10 @@
+{
+  "@singleQuote": "使用单引号代替双引号",
+  "singleQuote": true,
+  "@semi": "句尾添加分号",
+  "semi": false,
+  "@trailingComma": "在对象或数组最后一个元素后面是否加逗号",
+  "trailingComma": "none",
+  "@endOfLine": "结尾是 \n \r \n\r auto",
+  "endOfLine": "auto"
+}
