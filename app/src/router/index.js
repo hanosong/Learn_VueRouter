@@ -1,10 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../components/Home.vue'
-import AboutView from '../components/About.vue'
+// import HomeView from '../components/Home.vue'
+// import AboutView from '../components/About.vue'
 import UserView from '../components/User.vue'
 Vue.use(VueRouter) // 需要传入plugin插件--VueRouter
 
+// 统一一起管理动态组件
+const Home = () => import('../components/Home.vue')
+const About = () => import('../components/About.vue')
 const routes = [
   {
     path: '',
@@ -13,12 +16,14 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: HomeView
+    // component: HomeView
+    component: Home
   },
   {
     path: '/about',
     name: 'about',
-    component: AboutView
+    // component: AboutView
+    component: About
 
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

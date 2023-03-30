@@ -85,5 +85,32 @@
 
 vendor: 第三方，vue/vue-router/axios/bs
 路由懒加载： 一个路由打包一个文件
+写法：
 
-file:///D:/%E8%AF%BE%E4%BB%B6%E8%B5%84%E6%96%99/react/react/86/day86_React%E5%85%A8%E5%AE%B6%E6%A1%B6%E5%AE%9E%E6%88%98_07/Day07/Day07/PPT/11_React-Router%E8%B7%AF%E7%94%B1.pdf
+1. 老：结合 Vue 的异步组件和 Webpack 的代码分析
+
+```js
+const Home = (resolve) => {
+  require.ensure(["../components/Home.vue"], () => {
+    resolve(require("../components/Home.vue"));
+  });
+};
+```
+
+2. AMD 写法：
+
+````js
+const Abuout = (resolve) => require(["../components/About.vue"], resolve);
+```
+
+3. ES6集合Webpack的代码分割
+~~~js
+const Home = () => import('../components/About.vue')
+~~~
+
+///D:/%E8%AF%BE%E4%BB%B6%E8%B5%84%E6%96%99/react/react/86/day86_React%E5%85%A8%E5%AE%B6%E6%A1%B6%E5%AE%9E%E6%88%98_07/Day07/Day07/PPT/11_React-Router%E8%B7%AF%E7%94%B1.pdf
+
+file: ```
+
+```;
+````
