@@ -108,6 +108,66 @@ const Abuout = (resolve) => require(["../components/About.vue"], resolve);
 const Home = () => import('../components/About.vue')
 ~~~
 
+
+#### 路由的嵌套使用
+
+#### 传递参数
+> 路由跳转的时候如何携带参数？
+
+*  如何创建一个组件
+1. 创建新的组件Profile.vue
+2. 配置路由映射
+3. 添加跳转的<router-link>
+
+* 传递参数的方式有几种？
+1. params
+   1. 配置路由格式: /router/:id
+   2. 传递的方式： 在path后面跟上对应的值
+   3. 传递后形成的路径： /router/123, /router/abc
+   4. 通过$route.param对象取值
+2. query
+   1. 配置路由格式: /router， --> 普通配置
+   2. 传递的方式：对象中使用query的key作为传递方式
+   3. 传递后形成的路径: /router?id=123, /outer?id=abc
+
+url： 协议(scheme)://主机:端口/路径（path）?查询（query）
+
+在template中写对象，需要对key做v-bind绑定 => :to="{}"
+
+v-bind的作用：
+
+#### $route和this.$router的区别：
+$router为VueRouter实例，想要导航到不同URL，则使用$router.push方法
+this.$route => 处于活跃的路由对象，可以获取name，path，query，params等
+
+所有的组件都继承自vue的原型
+=> 在Vue的原型prototype上添加方法，所有实例都可以用该方法
+
+vue.use做了什么？
+> vue.use(插件)内置会变成vue.install(插件)
+>
+
+#### 导航守卫
+> 监听跳转的过程，用于做相应的操作
+
+meta: 源数据 -- 描述数据的数据
+
+导航钩子的三个参数
+1. to：即将要进入的目标的路由对象
+2  from: 当前导航即将要离开的路由对象
+3. next： 调用该方法后，才能进入下一个钩子；next(false) --中断跳转； next('/') -- 跳转到根页面
+
+导航钩子的种类（全局守卫）：
+1. 前置回调（guard）: beforeEach
+2. 后置回调（hook）: afterEach , 路由跳转完成才触发
+   已经跳转完成，所以不用调用next方法
+
+路由独享守卫的种类：
+
+
+#### keep-alive 和 vue-router
+> router-view 也是一个组件，如果被直接抱在keep-alive里面，所有路径匹配到的视图组件都会被缓存
+keep-alive 是vue内置的一个组件，可以使得被包含的组件保留状态，或避免重新渲染
 ///D:/%E8%AF%BE%E4%BB%B6%E8%B5%84%E6%96%99/react/react/86/day86_React%E5%85%A8%E5%AE%B6%E6%A1%B6%E5%AE%9E%E6%88%98_07/Day07/Day07/PPT/11_React-Router%E8%B7%AF%E7%94%B1.pdf
 
 file: ```

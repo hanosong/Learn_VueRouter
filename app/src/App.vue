@@ -7,9 +7,16 @@ import router from './router';
       <router-link to="/home">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <!-- <router-link to="/user">User</router-link> -->
-      <router-link :to="'/user/' + userId">User</router-link>
+      <router-link :to="'/user/' + userId">User</router-link> |
+      <router-link
+        :to="{ path: '/profile', query: { name: 'hakwan', age: '25' } }"
+        >Profile</router-link
+      >
       <!-- 使用其他方式跳转路由 -->
     </nav>
+    <div>
+      <button @click="profileClikHandle">用户档案</button>
+    </div>
     <!-- router-view 是路由内容显示出来的位置的占位符 -->
     <router-view />
   </div>
@@ -23,7 +30,19 @@ export default {
       userId: 'hakwan'
     }
   },
-  methods: {}
+  methods: {
+    profileClikHandle() {
+      /* 直接跳转，不携带参数
+      this.$router.push('xxx') */
+      this.$router.push({
+        path: '/profile',
+        query: {
+          name: 'wahaha',
+          age: '????'
+        }
+      })
+    }
+  }
 }
 </script>
 

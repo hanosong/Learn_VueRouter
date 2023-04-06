@@ -8,6 +8,9 @@ Vue.use(VueRouter) // 需要传入plugin插件--VueRouter
 // 统一一起管理动态组件
 const Home = () => import('../components/Home.vue')
 const About = () => import('../components/About.vue')
+const HomeNews = () => import('../components/HomeNews')
+const HomeMessage = () => import('../components/HomeMessage')
+const Profile = () => import('../components/Profile')
 const routes = [
   {
     path: '',
@@ -17,13 +20,39 @@ const routes = [
     path: '/home',
     name: 'home',
     // component: HomeView
-    component: Home
+    component: Home,
+    meta: {
+      // 源数据
+      title: '首页'
+    },
+    children: [
+      {
+        path: '',
+        redirect: 'news'
+      },
+      {
+        path: 'news', // 子路由不需要加分隔符 /
+        component: HomeNews
+      },
+      {
+        path: 'message',
+        component: HomeMessage
+      }
+    ]
   },
   {
     path: '/about',
     name: 'about',
     // component: AboutView
-    component: About
+    component: About,
+    meta: {
+      // 源数据
+      title: '关于'
+    },
+    beforeEach(to, from, next) {
+      console.log('beforeEach')
+      next()
+    }
 
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
@@ -36,6 +65,12 @@ const routes = [
     // path: '/user',
     name: 'user',
     component: UserView
+  },
+  {
+    path: '/profile',
+    // path: '/user',
+    name: 'user ',
+    component: Profile
   }
 ]
 
@@ -47,4 +82,16 @@ const router = new VueRouter({
   // linkActiveClass: 'active' // 统一修改router-link active-class="active"
 })
 
+// 添加全局导航守卫
+// 动态修改标题--前置钩子
+router.beforeEach((to, from, next) => {
+  // 从from跳转到to
+  document.title = to.matched[0].meta && to.matched[0].meta.title
+  next() // 必须调用,不调用的话路由不会跳转
+})
+
+// 后置钩子（hook）
+router.afterEach((to, from) => {
+  console.log(to, from, 'afterEach')
+})
 export default router
