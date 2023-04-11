@@ -1,3 +1,29 @@
+# 路由和它的发展
+
+## 前后端分离阶段
+
+### 前端渲染的理解
+
+- 每次请求涉及到的静态资源都会从静态资源服务器获取，这些资源包括 HTML / CSS / JS， 然后在前端对这些请求回来的资源进行渲染
+- 客户端的每一次请求，都会从静态资源服务器请求文件
+- 和之前的后端路由不同，这时后端只是负责提供 API 了
+
+### 前后端分离阶段
+
+- 随着 Ajax 的出现，有了前后端分离的开发模式
+- 后端只提供 API 来返回数据，前端通过 AJAX 获取数据，并且可以通过 JS 将数据渲染到页面上
+- 优点：前后端责任清晰，后端专注于数据上，前端专注于交互和可视化上
+- 并且当移动端（IOS/Android）出现后，后端不需要进行任何处理，依然使用之前的一套 Api 即可
+
+### 单页面的富应用阶段
+
+- SPA 最主要的特点就是在前后端分离的基础上加了一层前端路由
+- 也就是前端来维护一套路由规则
+
+### 前端路由的核心
+
+改变 URL 但是页面不进行整体的刷新 => url 的 hash 或者 h5 的 history
+
 #### href
 
 > hyper reference
@@ -99,78 +125,147 @@ const Home = (resolve) => {
 
 2. AMD 写法：
 
-````js
+```js
 const Abuout = (resolve) => require(["../components/About.vue"], resolve);
 ```
 
-3. ES6集合Webpack的代码分割
-~~~js
-const Home = () => import('../components/About.vue')
-~~~
+3. ES6 集合 Webpack 的代码分割
 
+```js
+const Home = () => import("../components/About.vue");
+```
 
 #### 路由的嵌套使用
 
 #### 传递参数
+
 > 路由跳转的时候如何携带参数？
 
-*  如何创建一个组件
-1. 创建新的组件Profile.vue
+- 如何创建一个组件
+
+1. 创建新的组件 Profile.vue
 2. 配置路由映射
 3. 添加跳转的<router-link>
 
-* 传递参数的方式有几种？
+- 传递参数的方式有几种？
+
 1. params
    1. 配置路由格式: /router/:id
-   2. 传递的方式： 在path后面跟上对应的值
+   2. 传递的方式： 在 path 后面跟上对应的值
    3. 传递后形成的路径： /router/123, /router/abc
-   4. 通过$route.param对象取值
+   4. 通过$route.param 对象取值
 2. query
    1. 配置路由格式: /router， --> 普通配置
-   2. 传递的方式：对象中使用query的key作为传递方式
+   2. 传递的方式：对象中使用 query 的 key 作为传递方式
    3. 传递后形成的路径: /router?id=123, /outer?id=abc
 
 url： 协议(scheme)://主机:端口/路径（path）?查询（query）
 
-在template中写对象，需要对key做v-bind绑定 => :to="{}"
+在 template 中写对象，需要对 key 做 v-bind 绑定 => :to="{}"
 
-v-bind的作用：
+v-bind 的作用：
 
-#### $route和this.$router的区别：
-$router为VueRouter实例，想要导航到不同URL，则使用$router.push方法
-this.$route => 处于活跃的路由对象，可以获取name，path，query，params等
+#### $route和this.$router 的区别：
 
-所有的组件都继承自vue的原型
-=> 在Vue的原型prototype上添加方法，所有实例都可以用该方法
+$router为VueRouter实例，想要导航到不同URL，则使用$router.push 方法
+this.$route => 处于活跃的路由对象，可以获取 name，path，query，params 等
 
-vue.use做了什么？
-> vue.use(插件)内置会变成vue.install(插件)
->
+所有的组件都继承自 vue 的原型
+=> 在 Vue 的原型 prototype 上添加方法，所有实例都可以用该方法
+
+vue.use 做了什么？
+
+> vue.use(插件)内置会变成 vue.install(插件)
 
 #### 导航守卫
+
 > 监听跳转的过程，用于做相应的操作
 
 meta: 源数据 -- 描述数据的数据
 
 导航钩子的三个参数
+
 1. to：即将要进入的目标的路由对象
-2  from: 当前导航即将要离开的路由对象
-3. next： 调用该方法后，才能进入下一个钩子；next(false) --中断跳转； next('/') -- 跳转到根页面
+   2 from: 当前导航即将要离开的路由对象
+2. next： 调用该方法后，才能进入下一个钩子；next(false) --中断跳转； next('/') -- 跳转到根页面
 
 导航钩子的种类（全局守卫）：
+
 1. 前置回调（guard）: beforeEach
 2. 后置回调（hook）: afterEach , 路由跳转完成才触发
-   已经跳转完成，所以不用调用next方法
+   已经跳转完成，所以不用调用 next 方法
 
 路由独享守卫的种类：
 
-
 #### keep-alive 和 vue-router
-> router-view 也是一个组件，如果被直接抱在keep-alive里面，所有路径匹配到的视图组件都会被缓存
-keep-alive 是vue内置的一个组件，可以使得被包含的组件保留状态，或避免重新渲染
-///D:/%E8%AF%BE%E4%BB%B6%E8%B5%84%E6%96%99/react/react/86/day86_React%E5%85%A8%E5%AE%B6%E6%A1%B6%E5%AE%9E%E6%88%98_07/Day07/Day07/PPT/11_React-Router%E8%B7%AF%E7%94%B1.pdf
+
+> router-view 也是一个组件，如果被直接抱在 keep-alive 里面，所有路径匹配到的视图组件都会被缓存
+> keep-alive 是 vue 内置的一个组件，可以使得被包含的组件保留状态，或避免重新渲染
+
+- keep-alive 有两个很重要的属性
+
+  1.  include - 字符串或者正则表达式，只有匹配的组件会被缓存
+  2.  exclude - 字符串或者正则表达式，任何匹配的组件都不会被缓存； ！！注意，多个组件时，逗号后面不要加空格
+
+# react-router
+
+安装 react-router-dom
+
+1. BrowserRouter
+2. HashRouter
+
+### 路由映射配置
+
+Routes: 包裹所有的 Route，在其中匹配一个路由
+
+- Router5.x 使用的是 Switch 组件
+
+Route: Route 用于路径的匹配
+
+- path 属性: 用于设置匹配到的路径
+- element 属性：设置匹配到的路径后，渲染的组件
+  - Route5.x 使用的是 component 属性
+- exact: 精准匹配，只有精准匹配到完全一致的路径，才会渲染对应的组件
+  - Router6.x 不再支持该属性
+
+### 路由配置和跳转
+
+Link 和 NavLink:
+通常路径的跳转是用 Link 组件，最终会被渲染成 a 元素
+NavLink 是在 link 基础上增加了一些样式属性
+
+- Link 默认为普通的 a 元素
+  to 属性： Link 中最重要的属性，用于设置跳转到的路径
+  replace 属性： 布尔，默认 false，true 则开启
+  reloadDocument： 布尔，默认 false，true 则每次都重新加载页面
+
+- NavLink 选中的时候会自动添加一个样式 active
+  style: 传入函数，函数接收一个对象，对象中可以结构出 isActive（点击时的类）
+
+  className： 动态加类名, 传入一个函数，函数接收一个对象，包含 isActive 属性
+
+  ```jsx
+   className={({isActive}) => isActive? "myclass": ''}
+   // 也可以把函数封装出来
+   className = {getActiveClass}
+   const getActiveClass = (isActive) => (
+      className({"link-active" : isActive})
+   )
+  ```
+
+### Navigate 导航
+
+> router5 中叫 Redirect
+> 用于路由的重定向，当这个组件出现时，就会执行跳转到对应的 to 的路径中
+
+```jsx
+
+```
+
+    > ///D:/%E8%AF%BE%E4%BB%B6%E8%B5%84%E6%96%99/react/react/86/day86_React%E5%85%A8%E5%AE%B6%E6%A1%B6%E5%AE%9E%E6%88%98_07/Day07/Day07/PPT/11_React-Router%E8%B7%AF%E7%94%B1.pdf
 
 file: ```
 
 ```;
-````
+
+```

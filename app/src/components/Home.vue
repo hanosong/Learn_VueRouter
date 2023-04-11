@@ -13,7 +13,18 @@
 
 <script>
 export default {
-  name: 'HomeView'
+  name: 'HomeView',
+  path: '/home/news',
+  created() {},
+  activated() {
+    // 进入页面的时候默认显示新闻路由
+    this.$router.push(this.path)
+  },
+  // 不能在deactivated钩子中记录跳转时的路由--触发太晚了，记录的是进入新路由的路径
+  beforeRouteLeave(to, from, next) {
+    this.path = this.$route.path
+    next()
+  }
 }
 </script>
 

@@ -26,10 +26,10 @@ const routes = [
       title: '首页'
     },
     children: [
-      {
+      /* {
         path: '',
         redirect: 'news'
-      },
+      }, */
       {
         path: 'news', // 子路由不需要加分隔符 /
         component: HomeNews
