@@ -5,6 +5,7 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
+import { Button } from 'antd'
 import "./App.css";
 import Home from "./views/home";
 import About from "./views/about";
@@ -34,10 +35,10 @@ function App() {
             </NavLink>{" "}
             | <NavLink to="/about">关于</NavLink>|{" "}
             <NavLink to="/login">登录</NavLink> | {/* 手动路由跳转 */}
-            <button onClick={() => navigateTo("/category")}>
+            <Button onClick={() => navigateTo("/category")}>
               category
-            </button> |{" "}
-            <button onClick={() => navigateTo("/order")}>order</button>
+            </Button> |{" "}
+            <Button onClick={() => navigateTo("/order")}>order</Button>
           </div>
           <hr />
         </div>
