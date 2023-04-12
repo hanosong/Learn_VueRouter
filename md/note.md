@@ -258,6 +258,29 @@ NavLink 是在 link 基础上增加了一些样式属性
 > router5 中叫 Redirect
 > 用于路由的重定向，当这个组件出现时，就会执行跳转到对应的 to 的路径中
 
+### NotFound 页面
+
+### 路由的嵌套
+
+### 自定义跳转-按钮
+
+- 使用 hook 时必须要写到函数顶层，而不能写道嵌套函数中，不然会报错
+  > React Hook "useNavigate" is called in function "navigateTo" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use"
+
+```js
+// 错误做法
+const navigateTo = (path) => {
+  const nav = useNavigate();
+  nav(path);
+};
+
+// 真确做法
+const nav = useNavigate();
+const navigateTo = (path) => {
+  nav(path);
+};
+```
+
 ```jsx
 
 ```
