@@ -280,6 +280,7 @@ const navigateTo = (path) => {
   nav(path);
 };
 ```
+#### 如果是在类组件中如何使用useNavigate
 
 ```jsx
 

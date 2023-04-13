@@ -15,6 +15,7 @@ import Recommend from "./views/HomeComponents/Recommend";
 import Ranking from "./views/HomeComponents/Ranking";
 import Category from "./views/Category";
 import Order from "./views/Order";
+import SongMenu from "./views/HomeComponents/SongMenu";
 function App() {
   const nav = useNavigate();
   const navigateTo = (path) => {
@@ -52,6 +53,7 @@ function App() {
               <Route path="/home" element={<Navigate to="/home/recommend" />} />
               <Route path="/home/recommend" element={<Recommend />} />
               <Route path="/home/ranking" element={<Ranking />} />
+              <Route path="/home/songmenu" element={<SongMenu />} />
             </Route>
             <Route path="/about" element={<About />} />
             <Route path="/login" element={<Login />} />
