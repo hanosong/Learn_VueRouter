@@ -264,6 +264,8 @@ NavLink 是在 link 基础上增加了一些样式属性
 
 ### 自定义跳转-按钮
 
+通过 useNavigate 的 hook 获取到 navigate 对象进行操作
+
 - 使用 hook 时必须要写到函数顶层，而不能写道嵌套函数中，不然会报错
   > React Hook "useNavigate" is called in function "navigateTo" that is neither a React function component nor a custom React Hook function. React component names must start with an uppercase letter. React Hook names must start with the word "use"
 
@@ -274,22 +276,32 @@ const navigateTo = (path) => {
   nav(path);
 };
 
-// 真确做法
+// 正确做法
 const nav = useNavigate();
 const navigateTo = (path) => {
   nav(path);
 };
 ```
-#### 如果是在类组件中如何使用useNavigate
+
+navigate 对象除了第一个参数 path，还可以传入第二个参数 option
+或者传入 delta（数字类型） => navigate（-1） -- 返回上一级...
+option？：{replace?: boolean; state?: }
+replace: true => 非 push 操作而是 replace 操作
+
+#### 如果是在类组件中如何使用 useNavigate
+
+=> 使用高阶函数组件处理，让类组件继承 useNavigate 方法
 
 ```jsx
 
 ```
 
-    > ///D:/%E8%AF%BE%E4%BB%B6%E8%B5%84%E6%96%99/react/react/86/day86_React%E5%85%A8%E5%AE%B6%E6%A1%B6%E5%AE%9E%E6%88%98_07/Day07/Day07/PPT/11_React-Router%E8%B7%AF%E7%94%B1.pdf
+### 路由传参
 
-file: ```
+1. 类似 vue 的动态路由： 路径+id
+2. 在 url 后拼接 queryString（查询字符串） => ?
 
-```;
+###
 
-```
+ReactRouter5, 如果想用配置的方式写路由，需要安装 react-router-config 库
+ReactRouter6 不需要

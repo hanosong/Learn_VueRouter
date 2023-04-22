@@ -1,6 +1,7 @@
 import React, { memo } from "react";
 
 const Ranking = memo(() => {
+
   return (
     <div>
       <h2>Ranking Nav</h2>

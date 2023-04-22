@@ -3,17 +3,28 @@ import { Link, Outlet } from "react-router-dom";
 import { Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import { witheRouter } from "../hoc";
+import Son from "./HomeComponents/Son";
 class Home extends PureComponent {
 
   navigateTo = (path) => {
     // 使用增强后传入的useNavigate
     this.props.router.navigate(path);
   }
+  SonRef = null
+  componentDidMount() {
+
+    console.log(this.SonRef, '--')
+  }
   render() {
     return (
       <div>
         Home
         <h4>这里是home页</h4>
+        <Son
+          wrapperComponentRef={(e => {
+            this.SonRef = e
+          })}
+        />
         <div className="home-nav">
           <Link to="/home/recommend">推荐</Link> | <Link to="/home/ranking">排行榜</Link>
           <div style={{ marginTop: '10px' }}>
