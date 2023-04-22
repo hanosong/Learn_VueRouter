@@ -8,7 +8,7 @@ import {
 import { Button } from "antd";
 import "./App.css";
 import Home from "./views/home";
-import About from "./views/about";
+// import About from "./views/about";
 import Login from "./views/Login";
 import NotFound from "./views/NotFound";
 import Recommend from "./views/HomeComponents/Recommend";
@@ -18,6 +18,10 @@ import Order from "./views/Order";
 import SongMenu from "./views/HomeComponents/SongMenu";
 import Detail from "./views/Detail";
 import User from "./views/User";
+
+// 懒加载；import是webpack的特性，当遇到import，webpack会对其单独进行一个打包
+// 注意：使用懒加载的时候需要用suspense包裹一下根组件
+const About = React.lazy(() => import("./views/about"));
 function App() {
   const nav = useNavigate();
   const navigateTo = (path) => {
