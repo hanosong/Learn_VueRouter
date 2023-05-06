@@ -18,7 +18,7 @@ import router from './router';
       <button @click="profileClikHandle">用户档案</button>
     </div>
     <!-- router-view 是路由内容显示出来的位置的占位符 -->
-    <keep-alive exclide="ProfileView,UserView">
+    <keep-alive exclude="ProfileView,UserView">
       <!-- ProfileView和UserView不需要被缓存 -->
       <router-view />
     </keep-alive>
